@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+*.log
+*.pyc
+.idea
+*.DS_Store*
+*.iml
+*.pem
+_gsdata_
+build
+logs
+conf
+content-design
+lilac.tgz
+

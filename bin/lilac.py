@@ -89,7 +89,9 @@ if __name__ == '__main__':
     application = tornado.web.Application([
         # This part is Evaluation Functions
         # EvaluationHandlers -> ListHandlers
-            (r'/$', HelloHandler, dict(conf=conf))
+        (r'/$', IndexHandler, dict(conf=conf)),
+        (r'/home', HomeHandler, dict(conf=conf)),
+        (r'/.*', ErrorHandler, dict(conf=conf))
 
         ],
         **settings)

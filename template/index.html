@@ -21,14 +21,27 @@
         .post-content {
             background: #fff;
             border: 1px solid #ddd;
+            border-top: none;
+        }
+        .article-img-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 67%;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-bottom: none;
         }
         #icon {
             width: 30px;
             margin-left: 20px;
+
         }
         #title {
-            font-size: 35px;
-            margin-left: 20px;
+            font-size: 28px;
+            /*margin-left: 20px;*/
+            /*margin-top: 100px;*/
+
         }
     </style>
 {% end %}
@@ -62,8 +75,8 @@
     <div class="banner">
         <div class="bg-color">
             <div class="container">
-                <div class="row">
-                    <h1 id="title">白敬亭,赛高!<br><small id="sub-title">&nbsp;www.baijingting.top</small></h1>
+                <div id="slogan" class="text-border row">
+                    <h1 class="text-dec" id="title">白敬亭,赛高!<br><small id="sub-title">&nbsp;www.baijingting.top</small></h1>
                 </div>
             </div>
         </div>
@@ -82,13 +95,17 @@
                     <p>有关小白的故事, 人物采访, 最新动态, 都在这里</p>
                     <hr class="bottom-line">
                 </div>
-                {% for i in range(0,3) %}
-                    <div class="col-md-4 col-sm-6 pad-5 article-gallery">
-                        <img src="{{static_url('images/course02.jpg')}}" class="img-responsive">
+                {% for article in articles %}
+                    <div class="col-md-4 col-sm-6 pad-5">
+                        <div class="article-img-container">
+                            <!--<img src="{{static_url('images/nav1-1.jpg')}}" class="img-responsive">-->
+                            <img src="{{article.cover}}" class="img-responsive">
+                        </div>
                         <div class="post-content pad-10">
-                            <h2 class="post-title"><a href="#" title="Go to Donec Vehicula Cursus Ante" rel="bookmark">Donec e</a></h2>
-                            <p> 图片比例和 post-content 长度怎么限制?, 图片目前是图本身就3:2,只限制100%宽度。border: 1px solid #ddd;perfect for showcasing your blog post in a stylish way. Nulla tempus sodales orci quis egestas.</p>
-                            <a class="post-readmore button" rel="nofollow" href="#">Read More调样式</a>
+                            <h2 class="post-title"><a href="{{article.detail_url}}" title="Go to Donec Vehicula Cursus Ante" rel="bookmark">{{article.title}}</a></h2>
+                            <!--<p> post-content 截取不短相同的字数, 图片目前是图本身就3:2,只限制100%宽度。border: 1px solid #ddd;perfect for showcasing your blog post in a stylish way. Nulla tempus sodales orci quis egestas.</p>-->
+                            <p>{{article.snippet}}</p>
+                            <a class="post-readmore button" rel="nofollow" href="{{article.detail_url}}">阅读全文</a>
                         </div>
                     </div>
                 {% end %}
@@ -200,7 +217,7 @@
     </section>
     <!--/ Profile-->
     <!--Comment-->
-    <section id ="buffer" class="section-padding">
+    <section id ="comment" class="section-padding">
         <div class="container">
             <div class="row">
                 <div class="header-section text-center">

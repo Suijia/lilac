@@ -11,7 +11,7 @@ class IndexHandler(BaseHandler):
 
     TOTAL_ARTICLE = 3
     MAX_TITLE = 25
-    MAX_SNIPPET = 87
+    MAX_SNIPPET = 80
 
     def initialize(self, conf):
         super(IndexHandler, self).initialize(conf)

@@ -18,19 +18,10 @@
         .pad-10 {
             padding: 10px;
         }
-        .post-content {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-top: none;
-        }
-        .article-img-container {
-            width: 100%;
-            height: 0;
-            padding-bottom: 67%;
-            overflow: hidden;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-bottom: none;
+        a:not(.nav-a):hover, a:not(.nav-a):focus, a:not(.nav-a):active{
+            text-decoration: none;
+            font-weight: 900;
+            text-shadow: 0 1px 1px rgba(202, 202, 202, 0.8);
         }
         #icon {
             width: 30px;
@@ -42,6 +33,30 @@
             /*margin-left: 20px;*/
             /*margin-top: 100px;*/
 
+        }
+        .article-img-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 67%;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-bottom: none;
+        }
+        .img-responsive {
+            width: 100%;
+        }
+        .post-content {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+        .article-snippet {
+            padding-bottom: 5px;
+        }
+        .photo-container {
+            overflow: hidden;
+            margin-bottom: 5px;
         }
     </style>
 {% end %}
@@ -61,11 +76,11 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#article">文章</a></li>
-                    <li><a href="#video">视频</a></li>
-                    <li><a href="#photo">图片</a></li>
-                    <li><a href="#profile">档案</a></li>
-                    <li><a href="#comment">评论</a></li>
+                    <li><a class="nav-a" href="#article">文章</a></li>
+                    <li><a class="nav-a" href="#video">视频</a></li>
+                    <li><a class="nav-a" href="#photo">图片</a></li>
+                    <li><a class="nav-a" href="#profile">档案</a></li>
+                    <li><a class="nav-a" href="#comment">评论</a></li>
                 </ul>
             </div>
         </div>
@@ -102,10 +117,9 @@
                             <img src="{{article.cover}}" class="img-responsive">
                         </div>
                         <div class="post-content pad-10">
-                            <h2 class="post-title"><a href="{{article.detail_url}}" title="Go to Donec Vehicula Cursus Ante" rel="bookmark">{{article.title}}</a></h2>
-                            <!--<p> post-content 截取不短相同的字数, 图片目前是图本身就3:2,只限制100%宽度。border: 1px solid #ddd;perfect for showcasing your blog post in a stylish way. Nulla tempus sodales orci quis egestas.</p>-->
-                            <p>{{article.snippet}}</p>
-                            <a class="post-readmore button" rel="nofollow" href="{{article.detail_url}}">阅读全文</a>
+                            <h2 class="article-title"><a href="{{article.detail_url}}">{{article.title}}</a></h2>
+                            <p class="article-snippet">{{article.snippet}}</p>
+                            <a class="readmore button" rel="nofollow" href="{{article.detail_url}}">阅读全文</a>
                         </div>
                     </div>
                 {% end %}
@@ -157,15 +171,15 @@
             <div class="row">
                 <div class="header-section text-center">
                     <h2>写真·画作·自拍</h2>
-                    <p>小白的出道故事, 人物采访, 最新动态, 都在这里</p>
+                    <p>小白的各种图, 墙外的 Instanram 也会搬过来的</p>
                     <hr class="bottom-line">
                 </div>
             </div>
         <div class="row">
         {% for i in range(6) %}
-            <div class="col-md-4 col-sm-6 pad-5">
+            <div class="photo-container col-md-4 col-sm-6 pad-5">
                 <figure class="imghvr-fade-in-down">
-                    <img src="{{static_url('images/course01.jpg')}}" class="img-responsive">
+                    <img src="http://ohpskaj7l.bkt.clouddn.com/photo-{{i}}.jpg" class="img-responsive">
                     <figcaption>
                         <h3>小白</h3>
                         <p>啦啦啦~</p>
@@ -256,6 +270,23 @@
         });
       })
     </script>
+
+    <script>
+      $(document).ready(function(){
+          var ratio = 1;
+          var container_width = $(".photo-container").width();
+          var photo_height = container_width * ratio
+          $(".photo-container").css('height', photo_height + 'px');
+
+          $(window).resize(function() {  // !!! Event: window resize
+              var container_width = $(".photo-container").width();
+              var photo_height = container_width * ratio
+              $(".photo-container").css('height', photo_height + 'px');
+          })
+      })
+    </script>
+
+
     <script type="text/javascript">
         var duoshuoQuery = {short_name:"baijingting"};
         (function() {
@@ -266,8 +297,9 @@
             (document.getElementsByTagName('head')[0]
              || document.getElementsByTagName('body')[0]).appendChild(ds);
         })();
-        </script>
+    </script>
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+
 {% end %}
 
 

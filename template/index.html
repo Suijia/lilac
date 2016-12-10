@@ -1,7 +1,7 @@
 {% extends "BasePage.html" %}
 
 {% block head-extend %}
-    <title>Home</title>
+    <title>白敬亭,赛高!</title>
     <!-- Custom css -->
     <link href="{{static_url('css/imagehover.css')}}" rel="stylesheet">
     <link href="{{static_url('css/home.css')}}" rel="stylesheet">
@@ -51,12 +51,33 @@
             border: 1px solid #ddd;
             border-top: none;
         }
+        .article-title {
+            font-size: 24px;
+            text-transform: capitalize;
+            color: #2b5d83;
+        }
         .article-snippet {
             padding-bottom: 5px;
         }
         .photo-container {
+            width: 100%;
             overflow: hidden;
             margin-bottom: 5px;
+        }
+        .video-cover-container{
+            position: relative;
+        }
+        .video-time {
+            position: absolute;
+            background-color: rgba(12, 11, 11, 0.4);
+            color: #fff;
+            width: 100%;
+            text-align: right;
+            bottom: 0;
+        }
+        .video-author{
+            text-align: right;
+            color: #5fcf80;
         }
     </style>
 {% end %}
@@ -111,13 +132,13 @@
                     <hr class="bottom-line">
                 </div>
                 {% for article in articles %}
-                    <div class="col-md-4 col-sm-6 pad-5">
+                    <div class="col-md-4 col-sm-4 pad-5">
                         <div class="article-img-container">
                             <!--<img src="{{static_url('images/nav1-1.jpg')}}" class="img-responsive">-->
                             <img src="{{article.cover}}" class="img-responsive">
                         </div>
                         <div class="post-content pad-10">
-                            <h2 class="article-title"><a href="{{article.detail_url}}">{{article.title}}</a></h2>
+                            <p class="article-title"><a href="{{article.detail_url}}">{{article.title}}</a><p>
                             <p class="article-snippet">{{article.snippet}}</p>
                             <a class="readmore button" rel="nofollow" href="{{article.detail_url}}">阅读全文</a>
                         </div>
@@ -141,18 +162,16 @@
                     <p>小白拍的剧、电影,参加的节目,白鸽做的 cut 和混剪</p>
                     <hr class="bottom-line">
                 </div>
-            {% for i in range(3)%}
+            {% for video in videos %}
                 <div class="col-md-4 col-sm-4 pad-5">
-                    <div class="price-table">
-                        <!-- Plan  -->
-                        <div class="pricing-head">
-                            <h4>Monthly Plan</h4>
-                            <span class="fa fa-inr curency"></span> <span class="amount">200</span>
-                        </div>
-                        <!-- Plean Detail -->
-                        <div class="price-in mart-15">
-                            <a href="#" class="btn btn-bg green btn-block">匆匆那年</a>
-                        </div>
+                    <div class="article-img-container video-cover-container">
+                            <img src="{{video.cover}}" class="img-responsive">
+                            <p class="video-time pad-5">{{video.video_time}}</p>
+                    </div>
+                    <div class="post-content pad-10">
+                        <p class="article-title"><a href="{{video.detail_url}}">{{video.title}}</a><p>
+                        <p class="article-snippet">{{video.snippet}}</p>
+                        <p class="video-author">{{video.author}}</p>
                     </div>
                  </div>
             {% end %}
@@ -176,13 +195,12 @@
                 </div>
             </div>
         <div class="row">
-        {% for i in range(6) %}
-            <div class="photo-container col-md-4 col-sm-6 pad-5">
-                <figure class="imghvr-fade-in-down">
-                    <img src="http://ohpskaj7l.bkt.clouddn.com/photo-{{i}}.jpg" class="img-responsive">
+        {% for photo in photos %}
+            <div class="col-md-4 col-sm-6 pad-5">
+                <figure class="imghvr-fade-in-down photo-container">
+                    <img src="{{photo.url}}" class="img-responsive">
                     <figcaption>
-                        <h3>小白</h3>
-                        <p>啦啦啦~</p>
+                        <h3>{{photo.title}}</h3>
                     </figcaption>
                 </figure>
             </div>
@@ -205,18 +223,20 @@
                     <p>司机白,白 bra,背锅侠……</p>
                     <hr class="bottom-line">
                 </div>
-            {% for i in range(3)%}
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="pm-staff-profile-container" >
-                        <div class="pm-staff-profile-image-wrapper text-center">
-                            <div class="pm-staff-profile-image">
-                            <!--<img src="{{static_url('images/round1.jpg')}}">-->
+            {% for profile in profiles %}
+                <div class="col-sm-4">
+                    <div class="profile-container" >
+                        <div class="profile-image-wrapper text-center">
+                            <div class="profile-img-container">
+                                <img src="{{profile.cover}}" class="img-responsive">
                             </div>
                         </div>
-                        <div class="pm-staff-profile-details text-center">
-                            <p class="pm-staff-profile-name">白 Bra</p>
-                            <p class="pm-staff-profile-title">热爱rap的白 bra,从明星大侦探到天天向上</p>
-                            <p class="pm-staff-profile-bio text-justify">限字数,限图片形状placerat dui. In posuere metus et elit placerat tristique. Maecenas eu est in sem ullamcorper tincidunt. </p>
+                        <div class="profile-details text-center">
+                            <a href="{{profile.detail_url}}">
+                                <p class="profile-name">{{profile.title}}</p>
+                                <p class="profile-title">{{profile.subtitle}}</p>
+                            </a>
+                            <p class="profile-bio text-justify">{{profile.snippet}}</p>
                         </div>
                     </div>
                 </div>
@@ -299,7 +319,6 @@
         })();
     </script>
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-
 {% end %}
 
 

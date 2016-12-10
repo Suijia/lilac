@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 #-*-coding:utf-8-*-
 
-__author__ = 'pudding'
-
 import sys
 import os
 import yaml
@@ -13,12 +11,9 @@ import tornado.netutil
 import tornado.process
 import tornado.log
 
-# for debug
 import tornado.autoreload
 
-
 from handlers import *
-
 
 def get_project_path(conf):
     """

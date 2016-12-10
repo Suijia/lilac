@@ -1,0 +1,50 @@
+body
+{
+	background-color: #68b2b1;
+    color: white;
+}
+a, a:hover, a:focus{
+	text-decoration: none;
+    color: #fff;
+}
+.white
+{
+	color: #fff;
+}
+#404-content {
+    padding: 15px;
+}
+h1.error-title
+{
+	font-size: 135px;
+	font-family: 'Arimo', sans-serif;
+}
+h1.error-title small
+{
+	font-size: 80px;
+	color: #fff;
+}
+.alert-icon i
+{
+	font-size: 88px;
+
+}
+h3.sub-title
+{
+	font-size: 30px;
+	padding-bottom: 15px;
+}
+.btn-back, .btn-back:hover, .btn-back:focus
+{
+	background-color: #E74C3C;
+	padding: 15px 20px;
+	display: inline-block;
+	margin-top: 30px;
+}
+.btn-back i
+{
+	padding-left: 5px;
+}
+
+
+

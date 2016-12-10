@@ -1,0 +1,58 @@
+{% extends "BasePage.html" %}
+
+{% block head-extend %}
+    <title>找不到小白了</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,600|Arimo:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <!-- Custom css -->
+    <link href='{{static_url("css/404.css")}}' rel="stylesheet">
+    <style>
+
+    </style>
+{% end %}
+
+{% block header %}{% end %}
+
+{% block content %}
+          <div class="container text-center" id="404-content">
+            <div class="row">
+              <p class="alert-icon"><i class="fa fa-exclamation-triangle"></i></p>
+              <h1 class="error-title"><small class="white">ERROR</small> 404</h1>
+              <h3 class="sub-title">找不到页面了!</h3>
+              <p class="page-par">网络有些问题,或者、白鸽是不是输错网址啦~ಥ_ಥ~再试一下咯,么么 O(∩_∩)O~~</p>
+              <a href="/" class="btn-back">Go Back To Home!<i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+{% end %}
+{% block script-extend %}
+    <script>
+        $(document).ready(function(){
+                var windowH = $(window).height();
+                var contentH = $('header').outerHeight() + $('#page-content').height() + $('footer').outerHeight();
+                if(windowH > contentH) {
+                    $('#wrapper').css({'height': windowH +'px'});  // 如果可视窗口比 #overlay 长,就让 #overlay 和可视窗口一样长,保证 footer 在可视窗口底部
+                    var tmp_margin = (windowH - contentH) / 2;
+                    $('#page-content').css({'margin-top':tmp_margin +'px', 'margin-bottom':tmp_margin +'px'});
+                }
+                else {
+                        $('#wrapper').css({'height':contentH +'px'});
+                    }
+                $(window).resize(function(){  // !!! Event: window resize
+                    var windowH = $(window).height();  // 此时$(window).height();已经resize了,需要重新获取
+                    var contentH = $('header').outerHeight() + $('#page-content').height() + $('footer').outerHeight();
+                    if(windowH > (contentH)){
+                        $('#wrapper').css({'height':windowH +'px'});
+                        var tmp_margin = (windowH - contentH) / 2;
+                        $('#page-content').css({'margin-top':tmp_margin +'px', 'margin-bottom':tmp_margin +'px'});
+                    }
+                    else {
+                        $('#wrapper').css({'height':contentH +'px'});
+                    }
+                })
+            });
+
+    </script>
+{% end %}
+
+

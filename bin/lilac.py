@@ -86,8 +86,7 @@ if __name__ == '__main__':
         # EvaluationHandlers -> ListHandlers
         (r'/(google4e92208f413c96e2\.html)', tornado.web.StaticFileHandler, {'path': get_static_path(conf)}),
         (r'/$', IndexHandler, dict(conf=conf)),
-        (r'/home', HomeHandler, dict(conf=conf)),
-        (r'/.*', ErrorHandler, dict(conf=conf)),
+        # (r'/.*', ErrorHandler, dict(conf=conf)),
         ],
         **settings)
     tornado.log.app_log.info('Try to start server...')

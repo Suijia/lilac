@@ -1,7 +1,7 @@
 {% extends "BasePage.html" %}
 
 {% block head-extend %}
-    <title>白敬亭,赛高!</title>
+    <title>白敬亭,赛高! | 一个白敬亭的粉丝站</title>
     <!-- Custom css -->
     <link href="{{static_url('css/imagehover.css')}}" rel="stylesheet">
     <link href="{{static_url('css/home.css')}}" rel="stylesheet">
@@ -60,9 +60,11 @@
             padding-bottom: 5px;
         }
         .photo-container {
-            width: 100%;
             overflow: hidden;
             margin-bottom: 5px;
+        }
+        .imghvr-fade-in-down {
+            width: 100%;
         }
         .video-cover-container{
             position: relative;
@@ -92,7 +94,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            <a class="navbar-brand" href="#"><img src="{{static_url('images/bai-icon.png')}}" id="icon"></a>
+            <!--<a class="navbar-brand" href="#"><img src="{{static_url('images/bai-icon.png')}}" id="icon"></a>-->
+                <a class="navbar-brand" href="#"><img src="static/images/bai-icon.png" id="icon"></a>
                 <!---->
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -196,8 +199,8 @@
             </div>
         <div class="row">
         {% for photo in photos %}
-            <div class="col-md-4 col-sm-6 pad-5">
-                <figure class="imghvr-fade-in-down photo-container">
+            <div class="col-md-4 col-sm-6 pad-5 photo-container">
+                <figure class="imghvr-fade-in-down">
                     <img src="{{photo.url}}" class="img-responsive">
                     <figcaption>
                         <h3>{{photo.title}}</h3>

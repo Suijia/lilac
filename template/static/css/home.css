@@ -456,7 +456,7 @@ Course
 ************************************/
 [class*=" imghvr-"] figcaption,
 [class^="imghvr-"] figcaption {
-    background-color: RGBA(12, 11, 11, 0.5);
+    background-color: RGBA(12, 11, 11, 0);
     bottom: auto;
     right: auto;
 }

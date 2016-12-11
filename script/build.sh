@@ -34,11 +34,11 @@ cd ${BUILD_PATH}
 find ${SERVICE} -name ".*" | xargs rm -rf
 find ${SERVICE} -name "*.pyc" | xargs rm -rf
 find ${SERVICE} -name "*.pem" | xargs rm -rf
-rm template/static/images/7niu-sync
+rm -rf ${SERVICE}/template/static/images/7niu-sync
 
 cp ${SERVICE}/conf/service_${env}.yaml ${SERVICE}/conf/service.yaml
 
-tar -czf ${SERVICE}.tgz ${SERVICE}
+tar -czvf ${SERVICE}.tgz ${SERVICE}
 
 mv ${SERVICE}.tgz ../
 cd ../

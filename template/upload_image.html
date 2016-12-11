@@ -1,0 +1,122 @@
+{% extends "BasePage.html" %}
+
+{% block head-extend %}
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href='{{static_url("css/normalize.css")}}'>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		h3 {
+			font-size: 18px;
+			margin: 3px 5px;
+			color: #333;
+		}
+		#container {
+			width: 100%;
+			margin: auto;
+	    }
+	    #container > div {
+			-webkit-box-shadow: 0 4px 15px -5px #555;
+			box-shadow: 0 4px 15px -5px #555;
+			background-color: #fff;
+			width:220px;
+			padding:2px;
+			margin:5px;
+		}
+		#container > div img {
+			padding: 0px;
+			display: block;
+			width: 100%;
+		}
+	</style>
+<section class="content-header" style="text-align: center;">
+  <h3>图片上传工具</h3>
+</section>
+<section class="content" style="text-align: center;width: 1000px">
+      <form id="form" action="/image" method="post">
+       <table class="table table-striped" align="center" valign="middle" style="table-layout:fixed; font-size: 14px;">
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <textarea placeholder="此处输入需要上传的图片链接，多个以换行符或英文逗号分隔。" style="width: 950px;height: 100px" rows="3" id="image_urls" name="image_urls">{{image_urls}}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 840px">
+                        <input type="file" multiple onchange="selectImage(this);">
+                        <textarea style="display: none" name="image_objs" id="image_objs"></textarea>
+                    </td>
+                    <td >
+                         <button id="add_new_category_img_btn" style="margin-left: 410px" type="submit" class="btn btn-xs btn-warning">批量上传</button>
+                    </td>
+                </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea style="width: 950px;height: 100px" rows="3">{{image_back_strings}}</textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+       </form>
+	<div class="htmleaf-container">
+		<div id="container">
+            {% if len(image_back_list)>0 %}
+	        {% for image in image_back_list %}
+                {% if image !="error" %}
+			    <div>
+			    	<a target="_blank" href="{{image}}">
+			    		<img src="{{image}}" alt="">
+			    	</a>
+			    </div>
+                {% end %}
+	        {% end %}
+            {% end %}
+		</div>
+	</div>
+</section>
+<script type="text/javascript" src='{{static_url("js/pinto.min.js")}}'></script>
+<script type="text/javascript">
+    $(window).load(function(){
+        $('#container').pinto();
+    });
+</script>
+<script type="text/javascript">
+var image_objs = '';
+var img_width='';
+var img_height='';
+function selectImage(file){
+image_objs = '';
+img_width='';
+img_height='';
+$("#image_urls").text('');
+if(!file.files || !file.files[0]){
+return;
+}
+for (var x=0; x<file.files.length; x++) {
+  var reader = new FileReader();
+  reader.onload = function (evt) {
+    var image_obj_tmp =   evt.target.result;
+    var image = new Image();
+    image.onload=function(){
+        img_width = image.width;
+        img_height = image.height;
+        image_objs = image_objs + image_obj_tmp+"img_width"+img_width+"img_height"+img_height+"for_split";
+    };
+    image.src= image_obj_tmp;
+  };
+  reader.readAsDataURL(file.files[x]);
+}
+}
+
+$('#form').submit(function() {
+    $("#image_objs").text(image_objs);
+});
+
+</script>
+{% end %}
+
+
+
+
